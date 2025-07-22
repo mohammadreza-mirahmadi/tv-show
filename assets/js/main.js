@@ -209,13 +209,13 @@ function rendercardEpisodes(data, parent) {
     if (data.number < 10) {
       number = `S0${data.season} - E0${data.number}`;
     } else {
-      number = `S0${data.season} - E${data.nuber}`;
+      number = `S0${data.season} - E${data.number}`;
     }
   } else {
     if (data.number < 10) {
       number = `S${data.season} - E0${data.number}`;
     } else {
-      number = `S${data.season} - E${data.nuber}`;
+      number = `S${data.season} - E${data.number}`;
     }
   }
 
