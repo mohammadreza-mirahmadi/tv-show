@@ -223,7 +223,6 @@ function rendercardEpisodes(data, parent) {
   episodeTitle.className = "episode__title";
   episodeTitle.textContent = `${number} ${data.name}`;
   episodeBody.append(episodeTitle);
-  // console.log("check");
 
   const episodeBtn = document.createElement("div");
   episodeBtn.className = "episode__btn";
@@ -234,6 +233,17 @@ function rendercardEpisodes(data, parent) {
   episodeBtnIcon.src = "./assets/img/play.png";
   episodeBtn.append(episodeBtnIcon);
 }
+
+// function episodeDropDown() {
+//   searchInput.style.display = "none";
+//   const dropDown = document.createElement("div");
+//   dropDown.className = "dropDown";
+//   dropDown.textContent = "All Episodes";
+//   dropDown.addEventListener("click", () => {});
+//   document
+//     .querySelector(".searchbox")
+//     .insertAdjacentElement("afterbegin", dropDown);
+// }
 // با صدا زدن این فانگشن، موقع لود سایت، هوم ساخته میشود.
 getShows(url);
 
