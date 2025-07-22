@@ -66,6 +66,26 @@ async function getShows(url) {
   }
 }
 
+async function renderMovieEpisodes(id) {
+  try {
+    const episodeRes = await fetch(
+      `https://api.tvmaze.com/shows/${id}/episodes`
+    );
+    const episodeData = await episodeRes.json();
+    console.log(episodeData);
+    mainSection.innerHTML = "";
+    const parent = document.createElement("section");
+    parent.className = "cards";
+    mainSection.append(parent);
+    episodeData.forEach((item) => {
+      rendercardEpisodes(item, parent);
+    });
+  } catch (err) {
+    mainSection.innerHTML =
+      "<p style='color: red;'>It can't load episodes.</p>";
+  }
+}
+
 function renderHomeContent(data) {
   const heroSection = document.createElement("section");
   heroSection.className = "hero-section";
@@ -83,17 +103,13 @@ function renderHomeContent(data) {
   renderCards(data);
 }
 
-// فانکشنی برای ساخت کارت ها
 function createCard(data) {
   const card = document.createElement("div");
   card.className = "card";
   card.id = data.id;
   card.addEventListener("click", (e) => {
     const cardId = e.currentTarget.id;
-
-    history.pushState({ page: "movies", id: cardId }, "", `#movie-${cardId}`);
-
-    mainSection.innerHTML = "slam";
+    renderMovieEpisodes(cardId);
   });
   cardsLink.insertAdjacentElement("beforebegin", card);
 
@@ -123,7 +139,6 @@ function createCard(data) {
   cardBody.append(cardRating);
 }
 
-// فانکشنی برای ساخت کارت های دیفالت هوم
 function renderCards(data) {
   renderCardsCounter++;
   let dataSliceMax = renderCardsCounter * 40;
@@ -144,7 +159,6 @@ function renderCards(data) {
   });
 }
 
-// فانکشنی برای ساخت کارت های فیلم سرچ شده
 function renderSearchCard(data) {
   cardsSection.innerHTML = "";
   cardsLink.style.display = "none";
@@ -157,11 +171,69 @@ function renderSearchCard(data) {
   });
 }
 
-function randomHeroImg(data) {
-  const randomIndex = Math.floor(Math.random * data.length);
-  // if (data[randomIndex].)
-}
+function rendercardEpisodes(data, parent) {
+  const episode = document.createElement("div");
+  episode.className = "episode";
+  episode.addEventListener("mouseover", () => {
+    summary.style.display = "block";
+  });
+  episode.addEventListener("mouseleave", () => {
+    summary.style.display = "none";
+  });
+  episode.addEventListener("click", () => {
+    location.href = data.url;
+  });
+  parent.append(episode);
 
+  let summaryText = data.summary;
+  if (summaryText.length > 254) {
+    summaryText = summaryText.slice(0, 247) + "...</p>";
+  }
+  const summary = document.createElement("div");
+  summary.className = "episode__summary";
+  summary.innerHTML = summaryText;
+  episode.append(summary);
+
+  const episodeImg = document.createElement("img");
+  episodeImg.className = "episode__img";
+  episodeImg.src = data.image.medium;
+  episodeImg.alt = data.name;
+  episode.append(episodeImg);
+
+  const episodeBody = document.createElement("div");
+  episodeBody.className = "episode__body";
+  episode.append(episodeBody);
+
+  let number = null;
+  if (data.season < 10) {
+    if (data.number < 10) {
+      number = `S0${data.season} - E0${data.number}`;
+    } else {
+      number = `S0${data.season} - E${data.nuber}`;
+    }
+  } else {
+    if (data.number < 10) {
+      number = `S${data.season} - E0${data.number}`;
+    } else {
+      number = `S${data.season} - E${data.nuber}`;
+    }
+  }
+
+  const episodeTitle = document.createElement("p");
+  episodeTitle.className = "episode__title";
+  episodeTitle.textContent = `${number} ${data.name}`;
+  episodeBody.append(episodeTitle);
+  // console.log("check");
+
+  const episodeBtn = document.createElement("div");
+  episodeBtn.className = "episode__btn";
+  episodeBody.append(episodeBtn);
+
+  const episodeBtnIcon = document.createElement("img");
+  episodeBtnIcon.className = "episode__icon";
+  episodeBtnIcon.src = "./assets/img/play.png";
+  episodeBtn.append(episodeBtnIcon);
+}
 // با صدا زدن این فانگشن، موقع لود سایت، هوم ساخته میشود.
 getShows(url);
 
