@@ -177,7 +177,7 @@ body {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 1rem;
   padding-bottom: 1.8rem;
   position: relative;
@@ -196,7 +196,7 @@ body {
   width: 100%;
 }
 .card__body {
-  font-size: 0.9rem;
+  font-size: 0.6rem;
   width: 100%;
   padding: 0 1rem;
   background: linear-gradient(
@@ -207,18 +207,20 @@ body {
   position: absolute;
   z-index: 9;
   bottom: 0;
+  color: #f0f0f0;
 }
+
 .card__title {
-  font-size: 1.3rem;
+  font-size: 0.8rem;
   font-weight: bold;
   letter-spacing: 0.05rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 .card__genres {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 .card__rating {
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
 }
 .cards__link {
   font-size: 0.8rem;
@@ -320,6 +322,32 @@ body {
   .container {
     width: 500px;
     margin: 0 auto;
+  }
+  .cards {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+  .card__body {
+    font-size: 0.9rem;
+    width: 100%;
+    padding: 0 1rem;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 1) 20%,
+      rgba(255, 255, 255, 0)
+    );
+    position: absolute;
+    z-index: 9;
+    bottom: 0;
+  }
+  .card__title {
+    font-size: 1.3rem;
+  }
+
+  .card__genres {
+    margin-bottom: 0.8rem;
+  }
+  .card__rating {
+    margin-bottom: 2rem;
   }
 }
 @media screen and (min-width: 768px) {
