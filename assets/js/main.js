@@ -56,13 +56,13 @@ async function getShows(url) {
         }
       } catch (err) {
         document.querySelector("main").innerHTML =
-          "<p style='color: red; text-align: center;'>Faild to load. Please try again later.1</p>";
+          "<p style='color: red; text-align: center;'>Faild to load. Please try again later.</p>";
         console.error(err);
       }
     });
   } catch (err) {
     document.querySelector("main").innerHTML =
-      "<p style='color: red; text-align: center;'>Faild to load. Please try again later.2</p>";
+      "<p style='color: red; text-align: center;'>Faild to load. Please try again later.</p>";
   }
 }
 
@@ -234,26 +234,8 @@ function rendercardEpisodes(data, parent) {
   episodeBtn.append(episodeBtnIcon);
 }
 
-// function episodeDropDown() {
-//   searchInput.style.display = "none";
-//   const dropDown = document.createElement("div");
-//   dropDown.className = "dropDown";
-//   dropDown.textContent = "All Episodes";
-//   dropDown.addEventListener("click", () => {});
-//   document
-//     .querySelector(".searchbox")
-//     .insertAdjacentElement("afterbegin", dropDown);
-// }
-// با صدا زدن این فانگشن، موقع لود سایت، هوم ساخته میشود.
 getShows(url);
 
-// getShows(url);
-searchIcon.addEventListener("click", () => {
-  if (searchInput.style.display === "block") {
-    searchInput.focus();
-    console.log("focus");
-  }
-});
 const burgerMenu = document.querySelector(".burger-menu");
 burgerMenu.addEventListener("click", (e) => {
   e.currentTarget.classList.toggle("open");

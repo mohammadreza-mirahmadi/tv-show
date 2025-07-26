@@ -229,7 +229,7 @@ body {
   cursor: pointer;
   text-transform: capitalize;
   position: absolute;
-  bottom: 0;
+  bottom: -1rem;
 }
 
 /* episodes */
